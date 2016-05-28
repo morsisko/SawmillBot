@@ -11,9 +11,13 @@
 
 #define WOOD 1
 #define BOMB 2
+
 DWORD WINAPI DLLStart(LPVOID param)
 {
-	TMiniGameManager* manager = **(TMiniGameManager***)(FindPattern((BYTE*)0x500000, 0x200000, (BYTE*)("\xA1\x00\x00\x00\x00\x8B\x08\xFF\x51\x44\xA1\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x33\xD2"), "x????xxxxxx????x????xx") + 1);
+	TMiniGameManager* manager = **(TMiniGameManager***)(FindPattern((BYTE*)0x500000, 
+														0x200000, 
+														(BYTE*)("\xA1\x00\x00\x00\x00\x8B\x08\xFF\x51\x44\xA1\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x33\xD2"), "x????xxxxxx????x????xx") + 1);
+
 	MiniGame_1* game = manager->miniGameManagerList->getMiniGame();
 
 	if (IsBadReadPtr(game, sizeof(game)))
