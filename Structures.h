@@ -5,6 +5,7 @@
 class MiniGame_1;
 class TimingShotGame;
 class MiniGameManagerList;
+class HitBox;
 
 class MiniGame_1
 {
@@ -27,7 +28,9 @@ class TimingShotGame
 public:
 	char _0x0000[36];
 	void* data; //0x0024 
-	char _0x0028[36];
+	char _0x0028[8];
+	HitBox* hitBox; //0x0030 
+	char _0x0034[24];
 	MiniGame_1* miniGame; //0x004C 
 
 };//Size=0x0050
@@ -59,3 +62,11 @@ public:
 	MiniGameManagerList* miniGameManagerList; //0x0020 
 
 };//Size=0x0024
+
+class HitBox
+{
+public:
+	__int32 first; //0x0000 
+	__int32 second; //0x0004 
+
+};//Size=0x0008

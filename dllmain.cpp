@@ -28,20 +28,33 @@ DWORD WINAPI DLLStart(LPVOID param)
 	void* leftPaddleData = game->leftPaddle->data;
 	void* rightPaddleData = game->rightPaddle->data;
 
+	//Get size of the area where we can hit
+	//You can use it if you do randomize shots, not only the "perfect shots"
+	//HitBox* hitbox = game->leftPaddle->hitBox;
+
+	//Get the value when we should end our iterate:
+
+	//Paddle hitbox area(the place where we can hit) has 110(game->leftPaddle->hitBox->first) bytes.
+	//If the wood is between byte 40 and byte 70 we get the "Nice" result, and as a result, the "combo x"
+	//Really the front of the paddle is at the back of memory, so at offset 397 is the start of the paddle, and at 287(387-110) is the end of paddle
+
+	
+	//int iterateTo = 397 - hitbox->first; - If you want to hit the wood extremally fast when it appear on the hitbox area
+	
+	//We iterate the last(really first) 70 bytes, because we don't want to lose wood, when it will be at the byte lower than 40, but we still prefer to get combo
+	int iterateTo = 397 - 70;
+
 	//Find hwnd of NosTale window
 	HWND hwnd = FindWindowA("TNosTaleMainF", "NosTale");
 
 	while (true)
 	{
-		//Chceck if minigame is on
+		//Check if minigame is on
 		if (game->m_bIsOn)
 		{
 
-			//Paddle hitbox area(the place where we can hit) has 110 bytes (397-287).
-			//If the wood is between byte 40 and byte 70 we get the "Nice" result, and as a result, the "combo x"
-			//Really the front of the paddle is at the back of memory, so at offset 397 is the start of the paddle, and at 287 is the end of paddle
-			//We iterate the last(really first) 70 bytes, because we don't want to lose wood, when it will be at the byte lower than 40, but we still prefer to get combo
-			for (int i = 397; i != 327; --i) // 287 max
+
+			for (int i = 397; i != iterateTo; --i)
 			{
 				if (*(BYTE*)((DWORD)leftPaddleData + (DWORD)i) == WOOD)
 				{
