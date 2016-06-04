@@ -25,8 +25,8 @@ DWORD WINAPI DLLStart(LPVOID param)
 		return -1;
 
 	//Get the paddles data
-	void* leftPaddleData = game->leftPaddle->data;
-	void* rightPaddleData = game->rightPaddle->data;
+	DWORD leftPaddleData = (DWORD)game->leftPaddle->data;
+	DWORD rightPaddleData = (DWORD)game->rightPaddle->data;
 
 	//Get size of the area where we can hit
 	//You can use it if you do randomize shots, not only the "perfect shots"
@@ -42,7 +42,7 @@ DWORD WINAPI DLLStart(LPVOID param)
 	//int iterateTo = 397 - hitbox->first; - If you want to hit the wood extremally fast when it appear on the hitbox area
 	
 	//We iterate the last(really first) 70 bytes, because we don't want to lose wood, when it will be at the byte lower than 40, but we still prefer to get combo
-	int iterateTo = 397 - 70;
+	DWORD iterateTo = 397 - 70;
 
 	//Find hwnd of NosTale window
 	HWND hwnd = FindWindowA("TNosTaleMainF", "NosTale");
@@ -52,11 +52,9 @@ DWORD WINAPI DLLStart(LPVOID param)
 		//Check if minigame is on
 		if (game->m_bIsOn)
 		{
-
-
-			for (int i = 397; i != iterateTo; --i)
+			for (DWORD i = 397; i != iterateTo; --i)
 			{
-				if (*(BYTE*)((DWORD)leftPaddleData + (DWORD)i) == WOOD)
+				if (*(BYTE*)(leftPaddleData + i) == WOOD)
 				{
 					PostMessage(hwnd, KEY_DOWN, VK_LEFT, 0);
 					PostMessage(hwnd, KEY_UP, VK_LEFT, 0);
@@ -64,7 +62,7 @@ DWORD WINAPI DLLStart(LPVOID param)
 					break;
 				}
 
-				if (*(BYTE*)((DWORD)rightPaddleData + (DWORD)i) == WOOD)
+				if (*(BYTE*)(rightPaddleData + i) == WOOD)
 				{
 					PostMessage(hwnd, KEY_DOWN, VK_RIGHT, 0);
 					PostMessage(hwnd, KEY_UP, VK_RIGHT, 0);
