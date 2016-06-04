@@ -18,7 +18,7 @@ DWORD WINAPI DLLStart(LPVOID param)
 					0x200000, 
 					(BYTE*)("\xA1\x00\x00\x00\x00\x8B\x08\xFF\x51\x44\xA1\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x33\xD2"), "x????xxxxxx????x????xx") + 1);
 
-	MiniGame_1* game = manager->miniGameManagerList->getMiniGame();
+	MiniGame_1* game = manager->miniGame_1;
 
 	//Check if the pointer to MiniGame_1 is correct
 	if (IsBadReadPtr(game, sizeof(MiniGame_1)))

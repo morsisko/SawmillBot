@@ -35,33 +35,21 @@ public:
 
 };//Size=0x0050
 
-class MiniGameManagerList
-{
-private:
-	void* basePointer; //0x0000
-	MiniGame_1** pointerToArray; //0x0004
-	int currentSize; //0x0008
-	int paddle[2];
-
-public:
-
-	MiniGame_1* getMiniGame()
-	{
-		if (currentSize <= 6)
-			return nullptr;
-		else
-			return pointerToArray[6];
-	}
-
-};//Size=0x0014
 
 class TMiniGameManager
 {
 public:
-	char _0x0000[32];
-	MiniGameManagerList* miniGameManagerList; //0x0020 
+	char _0x0000[104];
+	__int32 m_iCurrentMiniGame; //0x0068
+	char _0x006C[4];
+	void* miniGame_2; //0x0070 
+	MiniGame_1* miniGame_1; //0x0074 
+	void* miniGame_3; //0x0078 
+	void* miniGame_4; //0x007C 
+	void* miniGame_6; //0x0080 
+	void* miniGame_5; //0x0084 
 
-};//Size=0x0024
+};//Size=0x0088
 
 class HitBox
 {
