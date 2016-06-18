@@ -27,7 +27,7 @@ class TimingShotGame
 {
 public:
 	char _0x0000[36];
-	void* data; //0x0024 
+	BYTE* data; //0x0024 
 	char _0x0028[8];
 	HitBox* hitBox; //0x0030 
 	char _0x0034[24];

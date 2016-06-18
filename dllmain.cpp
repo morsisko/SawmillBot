@@ -25,8 +25,8 @@ DWORD WINAPI DLLStart(LPVOID param)
 		return -1;
 
 	//Get the paddles data
-	DWORD leftPaddleData = (DWORD)game->leftPaddle->data;
-	DWORD rightPaddleData = (DWORD)game->rightPaddle->data;
+	BYTE* leftPaddleData = game->leftPaddle->data;
+	BYTE* rightPaddleData = game->rightPaddle->data;
 
 	//Get size of the area where we can hit
 	//You can use it if you do randomize shots, not only the "perfect shots"
@@ -54,7 +54,7 @@ DWORD WINAPI DLLStart(LPVOID param)
 		{
 			for (DWORD i = 397; i != iterateTo; --i)
 			{
-				if (*(BYTE*)(leftPaddleData + i) == WOOD)
+				if (leftPaddleData[i] == WOOD)
 				{
 					PostMessage(hwnd, KEY_DOWN, VK_LEFT, 0);
 					PostMessage(hwnd, KEY_UP, VK_LEFT, 0);
@@ -62,7 +62,7 @@ DWORD WINAPI DLLStart(LPVOID param)
 					break;
 				}
 
-				if (*(BYTE*)(rightPaddleData + i) == WOOD)
+				if (rightPaddleData[i] == WOOD)
 				{
 					PostMessage(hwnd, KEY_DOWN, VK_RIGHT, 0);
 					PostMessage(hwnd, KEY_UP, VK_RIGHT, 0);
