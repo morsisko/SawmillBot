@@ -18,8 +18,8 @@ public:
 	__int8 m_bHp; //0x09C4 
 	char _0x09C5[3];
 	__int32 m_iPoints; //0x09C8 
-	__int8 m_bCombo; //0x09CC 
-	char _0x09CD[51];
+	__int32 m_iCombo; //0x09CC 
+	char _0x09D0[48];
 
 };//Size=0x0A00
 
@@ -39,8 +39,10 @@ public:
 class TMiniGameManager
 {
 public:
-	char _0x0000[104];
-	__int32 m_iCurrentMiniGame; //0x0068
+	char _0x0000[12];
+	void* currentMiniGame; //0x000C 
+	char _0x0010[88];
+	__int32 m_iCurrentMiniGame; //0x0068 
 	char _0x006C[4];
 	void* miniGame_2; //0x0070 
 	MiniGame_1* miniGame_1; //0x0074 
